@@ -26,5 +26,5 @@ you to this powerful tool.
 >
 > Notes for this workshop are avilable at <https://pad.carpentries.org/2022-07-13-upr-online>.
 >
-> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/raynamharris/2022-07-13-upr-online/shell-lessons-data) If have trouble downloading the software and/or data, launch binder to open a terminal in your browser window.
+> If have trouble downloading the software and/or data, [click here](https://mybinder.org/v2/gh/raynamharris/2022-07-13-upr-online/shell-lessons-data) to launch a binder for access to a terminal in a browser window.
 {: .callout}
