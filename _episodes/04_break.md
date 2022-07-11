@@ -1,7 +1,8 @@
 ---
-layout: break
 title: "Coffee Break"
 teaching: 0
-exercises: 0
-break: 30
+exercises: 30
+questions: 
+- "What have you learned?"
+- " What questions do you have?"" 
 ---
