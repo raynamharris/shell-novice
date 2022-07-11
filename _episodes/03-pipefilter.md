@@ -44,7 +44,8 @@ NENE01751A.txt	NENE01843B.txt	NENE02018B.txt	NENE02043A.txt
 ~~~
 {: .output}
 
-Nelle wants to quickly check the quality of her data. One way to do that is to see if the files are the right size and length.
+Nelle wants to quickly check the quality of her data.
+One way to do that is to see if the files are the right size and length.
 
 
 `wc` is the 'word count' command:
@@ -194,7 +195,9 @@ $ cat lengths.txt
 
 ## Filtering output
 
-Next we'll use the `sort` command to sort the contents of the `lengths.txt` file. We will use the `-n` option to specify that the sort is
+Next we'll use the `sort` command to sort the contents of 
+the `lengths.txt` file. 
+We will use the `-n` option to specify that the sort is
 numerical instead of alphanumerical.
 This does *not* change the file;
 instead, it sends the sorted result to the screen:
@@ -495,8 +498,10 @@ there's no depth recorded for either of those samples.
 Since it's too late to get the information any other way,
 she must exclude those two files from her analysis.
 She could delete them using `rm`,
-but there are actually some analyses she might do later where depth doesn't matter,
-so instead, she'll have to be careful later on to select files using the wildcard expressions `NENE*A.txt NENE*B.txt`.
+but there are actually some analyses she might do later where 
+depth doesn't matter,
+so instead, she'll have to be careful later on to select files 
+using the wildcard expressions `NENE*A.txt NENE*B.txt`.
 
 ~~~
 $ ls NENE*[AB].txt

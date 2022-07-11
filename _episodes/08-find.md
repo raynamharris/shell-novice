@@ -87,9 +87,11 @@ head -n 3 $1 | cut -d , -f 1 | sort | uniq > $2
 {: .output}
 
 
-Cat is useful when looking at small files, but when working with large files, sometimes you want to focus on specific parts.
+Cat is useful when looking at small files, but when working with large files,
+ sometimes you want to focus on specific parts.
 
-Many scripts have echo statements that print useful messages to the screen. Let's use grep to print just the echo statements to the screen. 
+Many scripts have echo statements that print useful messages to the screen. 
+Let's use grep to print just the echo statements to the screen. 
 
 ~~~
 $ grep "echo" *sh
@@ -106,7 +108,9 @@ goostats.sh:    echo "call goostats with two arguments"
 ~~~
 {: .output}
 
-We see four echo statements in goodiff.sh and two in goostats.sh. Notice that one echo statment has "random" and the other has "RANDOM". By default grep match the case, but we can use the option `-i` to ignore case.
+We see four echo statements in goodiff.sh and two in goostats.sh. 
+Notice that one echo statment has "random" and the other has "RANDOM". 
+By default grep match the case, but we can use the option `-i` to ignore case.
 
 ~~~
 $ grep -i "random" *.sh
@@ -137,7 +141,8 @@ goostats.sh:    echo "goostats file1 file2"
 ~~~
 {: .output}
 
-You can add the option `-w` to match the pattern as a word exactly. Because "file" doesn't occur in either script, this will return nothing.
+You can add the option `-w` to match the pattern as a word exactly. 
+Because "file" doesn't occur in either script, this will return nothing.
 
 ~~~
 $ grep -w "file" *sh
