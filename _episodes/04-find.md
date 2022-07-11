@@ -46,6 +46,13 @@ goodiff.sh	goostats.sh
 We can quickly view both script with `cat`.
 
 ~~~
+cat *,sh
+~~~
+{: .language-bash}
+
+
+
+~~~
 $ # check for the right number of input arguments
 if [ $# -ne 2 ]
   then
@@ -74,16 +81,6 @@ fi
 sleep 2
 head -n 3 $1 | cut -d , -f 1 | sort | uniq > $2
 
-~~~
-{: .language-bash}
-
-~~~
-goodiff.sh:    echo "goodiff file1 file2"
-goodiff.sh:    echo "call goodiff with two arguments"
-goodiff.sh:    echo "files are identical"
-goodiff.sh:    echo 0.$RANDOM
-goostats.sh:    echo "goostats file1 file2"
-goostats.sh:    echo "call goostats with two arguments"
 ~~~
 {: .output}
 
