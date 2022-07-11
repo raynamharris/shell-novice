@@ -662,7 +662,7 @@ $ grep "searching" $(find . -name "*.txt")
 > > but there are no `*.dat` files in the current directory,
 > > so the wildcard expression gets passed to `find`.
 > > We encounter this in
-> > [episode 6]({{ page.root }}{% link _episodes/06-create.md %}/#wildcards).
+> > [episode 6]({{ page.root }}{% link _episodes/04-create.md %}/#wildcards).
 > >
 > > Option 3 is incorrect because it searches the contents of the files for lines which
 > > do not match 'unicorn', rather than searching the file names.
