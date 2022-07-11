@@ -398,19 +398,20 @@ use the following series of commands to get there:
 ~~~
 $ cd Desktop
 $ cd shell-lesson-data
-$ cd exercise-data
+$ cd north-pacific-gyre/
 ~~~
 {: .language-bash}
 
 These commands will move us from our home directory into our Desktop directory, then into
-the `shell-lesson-data` directory, then into the `exercise-data` directory.
+the `shell-lesson-data` directory, then into the `north-pacific-gyre/` directory.
 You will notice that `cd` doesn't print anything. This is normal.
 Many shell commands will not output anything to the screen when successfully executed.
 But if we run `pwd` after it, we can see that we are now
-in `/Users/nelle/Desktop/shell-lesson-data/exercise-data`.
+in `/Users/nelle/Desktop/shell-lesson-data/north-pacific-gyre/`.
 
 If we run `ls -F` without arguments now,
-it lists the contents of `/Users/nelle/Desktop/shell-lesson-data/exercise-data`,
+it lists the contents of
+ `/Users/nelle/Desktop/shell-lesson-data/north-pacific-gyre/`,
 because that's where we now are:
 
 ~~~
@@ -419,7 +420,7 @@ $ pwd
 {: .language-bash}
 
 ~~~
-/Users/nelle/Desktop/shell-lesson-data/exercise-data
+/Users/nelle/Desktop/shell-lesson-data/north-pacific-gyre/
 ~~~
 {: .output}
 
@@ -429,7 +430,11 @@ $ ls -F
 {: .language-bash}
 
 ~~~
-animal-counts/  creatures/  numbers.txt  proteins/  writing/
+NENE01729A.txt	NENE01812A.txt	NENE01978B.txt	NENE02043B.txt
+NENE01729B.txt	NENE01843A.txt	NENE02040A.txt	goodiff.sh
+NENE01736A.txt	NENE01843B.txt	NENE02040B.txt	goostats.sh
+NENE01751A.txt	NENE01971Z.txt	NENE02040Z.txt
+NENE01751B.txt	NENE01978A.txt	NENE02043A.txt
 ~~~
 {: .output}
 
@@ -546,7 +551,7 @@ three commands, but we can actually string together the list of directories
 to move to `exercise-data` in one step:
 
 ~~~
-$ cd Desktop/shell-lesson-data/exercise-data
+$ cd Desktop/shell-lesson-data/north-pacific-gyre
 ~~~
 {: .language-bash}
 
@@ -587,7 +592,7 @@ $ cd /Users/nelle/Desktop/shell-lesson-data
 ~~~
 {: .language-bash}
 
-Run `pwd` and `ls -F` to ensure that we're in the directory we expect.
+Run `pwd` and `ls` to ensure that we're in the directory we expect.
 
 > ## Two More Shortcuts
 >
@@ -614,9 +619,9 @@ Run `pwd` and `ls -F` to ensure that we're in the directory we expect.
 > ~~~
 > {: .language-bash}
 >
-> Then `cd` into the `exercise-data/creatures` directory
+> Then `cd` into the `north-pacific-gyre` directory
 > ~~~
-> $ cd exercise-data/creatures
+> $ cd north-pacific-gyre
 > ~~~
 > {: .language-bash}
 >
@@ -626,7 +631,7 @@ Run `pwd` and `ls -F` to ensure that we're in the directory we expect.
 > ~~~
 > {: .language-bash}
 > you'll see you're back in `~/Desktop/shell-lesson-data`.
-> Run `cd -` again and you're back in `~/Desktop/shell-lesson-data/exercise-data/creatures`
+> Run `cd -` again and you're back in `~/Desktop/north-pacific-gyres`
 {: .callout}
 
 > ## Absolute vs Relative Paths
@@ -699,13 +704,21 @@ while `ls -S` will sort the files and directories by size, as shown below:
 
 ~~~
 $ cd ~/Desktop/shell-lesson-data
-$ ls -s exercise-data
+$ ls -s north-pacific-gyre
 ~~~
 {: .language-bash}
 
 ~~~
-total 28
- 4 animal-counts   4 creatures  12 numbers.txt   4 proteins   4 writing
+total 272
+16 NENE01729A.txt	16 NENE01978A.txt
+16 NENE01729B.txt	16 NENE01978B.txt
+16 NENE01736A.txt	16 NENE02040A.txt
+16 NENE01751A.txt	16 NENE02040B.txt
+16 NENE01751B.txt	16 NENE02040Z.txt
+16 NENE01812A.txt	16 NENE02043A.txt
+16 NENE01843A.txt	16 NENE02043B.txt
+16 NENE01843B.txt	 8 goodiff.sh
+16 NENE01971Z.txt	 8 goostats.sh
 ~~~
 {: .output}
 
@@ -715,7 +728,11 @@ $ ls -S exercise-data
 {: .language-bash}
 
 ~~~
-animal-counts  creatures  proteins  writing  numbers.txt
+NENE01751A.txt	NENE01843A.txt	NENE01978A.txt	NENE02040B.txt
+NENE01751B.txt	NENE02043B.txt	NENE02040Z.txt	goodiff.sh
+NENE01729A.txt	NENE02040A.txt	NENE01843B.txt	goostats.sh
+NENE01812A.txt	NENE01978B.txt	NENE01971Z.txt
+NENE01729B.txt	NENE02043A.txt	NENE01736A.txt
 ~~~
 {: .output}
 
