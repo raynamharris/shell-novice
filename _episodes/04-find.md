@@ -25,116 +25,130 @@ word 'grep'.
 a common sequence of operations in early Unix text editors.
 It is also the name of a very useful command-line program.
 
-`grep` finds and prints lines in files that match a pattern.
-For our examples,
-we will use a file that contains three haiku taken from a
-1998 competition in *Salon* magazine. For this set of examples,
-we're going to be working in the writing subdirectory:
+`grep` finds and prints lines within files that match a pattern.`find` finds files whose name matches a particular pattern. 
+
+
+For this example, let's explore the scripts in Neele's north pacific gyre directory
 
 ~~~
 $ cd
-$ cd Desktop/shell-lesson-data/exercise-data/writing
-$ cat haiku.txt
+$ cd ~/Desktop/shell-lesson-data/north-pacific-gyre
+$ ls *.sh
 ~~~
 {: .language-bash}
 
 ~~~
-The Tao that is seen
-Is not the true Tao, until
-You bring fresh toner.
-
-With searching comes loss
-and the presence of absence:
-"My Thesis" not found.
-
-Yesterday it worked
-Today it is not working
-Software is like that.
+goodiff.sh	goostats.sh
 ~~~
 {: .output}
 
-> ## Forever, or Five Years
->
-> We haven't linked to the original haiku because
-> they don't appear to be on *Salon*'s site any longer.
-> As [Jeff Rothenberg said](https://www.clir.org/wp-content/uploads/sites/6/ensuring.pdf),
-> 'Digital information lasts forever --- or five years, whichever comes first.'
-> Luckily, popular content often [has backups](http://wiki.c2.com/?ComputerErrorHaiku).
-{: .callout}
 
-Let's find lines that contain the word 'not':
+We can quickly view both script with `cat`.
 
 ~~~
-$ grep not haiku.txt
+$ # check for the right number of input arguments
+if [ $# -ne 2 ]
+  then
+    echo "goodiff file1 file2"
+    echo "call goodiff with two arguments"
+    exit 1
+fi
+
+
+# difference of two input files
+# demo version, just return a random number or "files are identical"
+if [ "$1" == "$2" ]
+then
+    echo "files are identical"
+else
+    echo 0.$RANDOM
+fi
+# check for the right number of input arguments
+if [ $# -ne 2 ]
+  then
+    echo "goostats file1 file2"
+    echo "call goostats with two arguments"
+    exit 1
+fi
+
+sleep 2
+head -n 3 $1 | cut -d , -f 1 | sort | uniq > $2
+
 ~~~
 {: .language-bash}
 
 ~~~
-Is not the true Tao, until
-"My Thesis" not found
-Today it is not working
+goodiff.sh:    echo "goodiff file1 file2"
+goodiff.sh:    echo "call goodiff with two arguments"
+goodiff.sh:    echo "files are identical"
+goodiff.sh:    echo 0.$RANDOM
+goostats.sh:    echo "goostats file1 file2"
+goostats.sh:    echo "call goostats with two arguments"
 ~~~
 {: .output}
 
-Here, `not` is the pattern we're searching for.
-The grep command searches through the file, looking for matches to the pattern specified.
-To use it type `grep`, then the pattern we're searching for and finally
-the name of the file (or files) we're searching in.
 
-The output is the three lines in the file that contain the letters 'not'.
+Cat is useful when looking at small files, but when working with large files, sometimes you want to focus on specific parts.
 
-By default, grep searches for a pattern in a case-sensitive way.
-In addition, the search pattern we have selected does not have to form a complete word,
-as we will see in the next example.
-
-Let's search for the pattern: 'The'.
+Many scripts have echo statements that print useful messages to the screen. Let's use grep to print just the echo statements to the screen. 
 
 ~~~
-$ grep The haiku.txt
+$ grep "echo" *sh
 ~~~
 {: .language-bash}
 
 ~~~
-The Tao that is seen
-"My Thesis" not found.
+goodiff.sh:    echo "goodiff file1 file2"
+goodiff.sh:    echo "call goodiff with two arguments"
+goodiff.sh:    echo "files are identical"
+goodiff.sh:    echo 0.$RANDOM
+goostats.sh:    echo "goostats file1 file2"
+goostats.sh:    echo "call goostats with two arguments"
 ~~~
 {: .output}
 
-This time, two lines that include the letters 'The' are outputted,
-one of which contained our search pattern within a larger word, 'Thesis'.
-
-To restrict matches to lines containing the word 'The' on its own,
-we can give `grep` with the `-w` option.
-This will limit matches to word boundaries.
-
-Later in this lesson, we will also see how we can change the search behavior of grep
-with respect to its case sensitivity.
+We see four echo statements in goodiff.sh and two in goostats.sh. Notice that one echo statment has "random" and the other has "RANDOM". By default grep match the case, but we can use the option `-i` to ignore case.
 
 ~~~
-$ grep -w The haiku.txt
+$ grep -i "random" *.sh
 ~~~
 {: .language-bash}
 
 ~~~
-The Tao that is seen
+goodiff.sh:# demo version, just return a random number or "files are identical"
+goodiff.sh:    echo 0.$RANDOM
 ~~~
 {: .output}
 
-Note that a 'word boundary' includes the start and end of a line, so not
-just letters surrounded by spaces.
-Sometimes we don't
-want to search for a single word, but a phrase. This is also easy to do with
-`grep` by putting the phrase in quotes.
+When search for patterns, grep by default will match words that have more character that specified by the pattern. For instance, the pattern "file" is in  "files" and "file1". 
 
 ~~~
-$ grep -w "is not" haiku.txt
+$ grep "file" *sh
 ~~~
 {: .language-bash}
 
 ~~~
-Today it is not working
+goodiff.sh:    echo "goodiff file1 file2"
+goodiff.sh:# difference of two input files
+goodiff.sh:# demo version, just return a random number or "files are identical"
+goodiff.sh:    echo "files are identical"
+goostats.sh:    echo "goostats file1 file2"
 ~~~
 {: .output}
+
+You can add the option `-w` to match the pattern as a word exactly. Because "file" doesn't occur in either script, this will return nothing.
+
+~~~
+$ grep -w "file" *sh
+~~~
+{: .language-bash}
+
+~~~
+
+~~~
+{: .output}
+
+
 
 We've now seen that you don't have to have quotes around single words,
 but it is useful to use quotes when searching for multiple words.
@@ -142,17 +156,19 @@ It also helps to make it easier to distinguish between the search term or phrase
 and the file being searched.
 We will use quotes in the remaining examples.
 
-Another useful option is `-n`, which numbers the lines that match:
+Another useful option is `-n`, which will print the line number were the pattern was found:
 
 ~~~
-$ grep -n "it" haiku.txt
+$ grep -n "file" *.sh
 ~~~
 {: .language-bash}
 
 ~~~
-5:With searching comes loss
-9:Yesterday it worked
-10:Today it is not working
+goodiff.sh:4:    echo "goodiff file1 file2"
+goodiff.sh:10:# difference of two input files
+goodiff.sh:11:# demo version, just return a random number or "files are identical"
+goodiff.sh:14:    echo "files are identical"
+goostats.sh:4:    echo "goostats file1 file2"
 ~~~
 {: .output}
 
@@ -160,73 +176,40 @@ Here, we can see that lines 5, 9, and 10 contain the letters 'it'.
 
 We can combine options (i.e. flags) as we do with other Unix commands.
 For example, let's find the lines that contain the word 'the'.
-We can combine the option `-w` to find the lines that contain the word 'the'
-and `-n` to number the lines that match:
+
+It is often useful to print the lines before or after the line with the matching pattern by adding the options  `-B 1` and `-A 1`. 
 
 ~~~
-$ grep -n -w "the" haiku.txt
-~~~
-{: .language-bash}
-
-~~~
-2:Is not the true Tao, until
-6:and the presence of absence:
-~~~
-{: .output}
-
-Now we want to use the option `-i` to make our search case-insensitive:
-
-~~~
-$ grep -n -w -i "the" haiku.txt
+$ grep -B 1 -A 1 "echo" *sh
 ~~~
 {: .language-bash}
 
 ~~~
-1:The Tao that is seen
-2:Is not the true Tao, until
-6:and the presence of absence:
-~~~
-{: .output}
-
-Now, we want to use the option `-v` to invert our search, i.e., we want to output
-the lines that do not contain the word 'the'.
-
-~~~
-$ grep -n -w -v "the" haiku.txt
-~~~
-{: .language-bash}
-
-~~~
-1:The Tao that is seen
-3:You bring fresh toner.
-4:
-5:With searching comes loss
-7:"My Thesis" not found.
-8:
-9:Yesterday it worked
-10:Today it is not working
-11:Software is like that.
+goodiff.sh-3-  then
+goodiff.sh:4:    echo "goodiff file1 file2"
+goodiff.sh:5:    echo "call goodiff with two arguments"
+goodiff.sh-6-    exit 1
+--
+--
+goodiff.sh-13-then
+goodiff.sh:14:    echo "files are identical"
+goodiff.sh-15-else
+--
+--
+goodiff.sh-15-else
+goodiff.sh:16:    echo 0.$RANDOM
+goodiff.sh-17-fi
+--
+--
+goostats.sh-3-  then
+goostats.sh:4:    echo "goostats file1 file2"
+goostats.sh:5:    echo "call goostats with two arguments"
+goostats.sh-6-    exit 1
 ~~~
 {: .output}
 
 
-If we use the `-r` (recursive) option,
-`grep` can search for a pattern recursively through a set of files in subdirectories.
 
-Let's search recursively for `Yesterday` in the `shell-lesson-data/exercise-data/writing` directory:
-
-```
-$ grep -r Yesterday .
-```
-{: .language-bash}
-
-```
-./LittleWomen.txt:"Yesterday, when Aunt was asleep and I was trying to be as still as a
-./LittleWomen.txt:Yesterday at dinner, when an Austrian officer stared at us and then
-./LittleWomen.txt:Yesterday was a quiet day spent in teaching, sewing, and writing in my
-./haiku.txt:Yesterday it worked
-```
-{: .output}
 
 `grep` has lots of other options. To find out what they are, we can type:
 

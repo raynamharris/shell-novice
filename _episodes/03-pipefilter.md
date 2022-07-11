@@ -488,38 +488,27 @@ NENE01971Z.txt    NENE02040Z.txt
 {: .output}
 
 Sure enough,
-when she checks the log on her laptop,
+when Nelle checks the log on her laptop,
 there's no depth recorded for either of those samples.
 Since it's too late to get the information any other way,
 she must exclude those two files from her analysis.
 She could delete them using `rm`,
 but there are actually some analyses she might do later where depth doesn't matter,
-so instead, she'll have to be careful later on to select files using the wildcard expressions
-`NENE*A.txt NENE*B.txt`.
+so instead, she'll have to be careful later on to select files using the wildcard expressions `NENE*A.txt NENE*B.txt`.
+
+~~~
+$ ls NENE*[AB].txt
+~~~
+{: .language-bash}
+
+~~~
+NENE01729A.txt	NENE01751B.txt	NENE01978A.txt	NENE02040B.txt
+NENE01729B.txt	NENE01812A.txt	NENE01978B.txt	NENE02043A.txt
+NENE01736A.txt	NENE01843A.txt	NENE02018B.txt	NENE02043B.txt
+NENE01751A.txt	NENE01843B.txt	NENE02040A.txt
+~~~
+{: .output}
 
 
-> ## Removing Unneeded Files
->
-> Suppose you want to delete your processed data files, and only keep
-> your raw files and processing script to save storage.
-> The raw files end in `.dat` and the processed files end in `.txt`.
-> Which of the following would remove all the processed data files,
-> and *only* the processed data files?
->
-> 1. `rm ?.txt`
-> 2. `rm *.txt`
-> 3. `rm * .txt`
-> 4. `rm *.*`
->
-> > ## Solution
-> > 1. This would remove `.txt` files with one-character names
-> > 2. This is correct answer
-> > 3. The shell would expand `*` to match everything in the current directory,
-> > so the command would try to remove all matched files and an additional
-> > file called `.txt`
-> > 4. The shell would expand `*.*` to match all files with any extension,
-> > so this command would delete all files
-> {: .solution}
-{: .challenge}
 
 {% include links.md %}
