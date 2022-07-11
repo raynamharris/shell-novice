@@ -15,13 +15,17 @@ you to this powerful tool.
 
 > ## Prerequisites
 >
-> This lesson guides you through the basics of file systems and the
-> shell. If you have stored files on a computer at all and recognize
-> the word "file" and either "directory" or "folder" (two common words
-> for the same thing), you're ready for this lesson.
+> Please watch the pre-workshop videos for installaion tips at https://indico.cern.ch/event/1159157/page/25297-pre-requisites
 >
-> If you're already comfortable manipulating files and directories,
-> searching for files with `grep` and `find`, and writing simple loops
-> and scripts, you probably want to explore the next lesson:
-> [shell-extras](https://carpentries-incubator.github.io/shell-extras/).
+> Please download the data for the lesson as described on the **Setup** page.
 {: .prereq}
+
+> ## Useful Links
+> 
+> The workshop website for this event is available at https://indico.cern.ch/event/1159157/.
+>
+> Notes for this workshop are avilable at https://pad.carpentries.org/2022-07-13-upr-online
+>
+> If have trouble downloading the software and/or data, you can launch this [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/raynamharris/2022-07-13-upr-online/shell-lessons-data)
+ to open a terminal in a browswer window.
+{: .callout}
