@@ -236,43 +236,6 @@ draft.txt
 ~~~
 {: .output}
 
-> ## Creating Files a Different Way
->
-> We have seen how to create text files using the `nano` editor.
-> Now, try the following command:
->
-> ~~~
-> $ touch my_file.txt
-> ~~~
-> {: .language-bash}
->
-> 1.  What did the `touch` command do?
->     When you look at your current directory using the GUI file explorer,
->     does the file show up?
->
-> 2.  Use `ls -l` to inspect the files.  How large is `my_file.txt`?
->
-> 3.  When might you want to create a file this way?
->
-> > ## Solution
-> > 1.  The `touch` command generates a new file called `my_file.txt` in
-> >     your current directory.  You
-> >     can observe this newly generated file by typing `ls` at the
-> >     command line prompt.  `my_file.txt` can also be viewed in your
-> >     GUI file explorer.
-> >
-> > 2.  When you inspect the file with `ls -l`, note that the size of
-> >     `my_file.txt` is 0 bytes.  In other words, it contains no data.
-> >     If you open `my_file.txt` using your text editor it is blank.
-> >
-> > 3.  Some programs do not generate output files themselves, but
-> >     instead require that empty files have already been generated.
-> >     When the program is run, it searches for an existing file to
-> >     populate with its output.  The touch command allows you to
-> >     efficiently generate a blank text file to be used by such
-> >     programs.
-> {: .solution}
-{: .challenge}
 
 > ## What's In A Name?
 >
@@ -298,7 +261,10 @@ draft.txt
 > when someone double-clicks it.
 {: .callout}
 
+
+
 ## Moving files and directories
+
 Returning to the `shell-lesson-data/exercise-data/writing` directory,
 
 ```
@@ -498,56 +464,6 @@ quotations.txt
 > {: .solution}
 {: .challenge}
 
-> ## Moving and Copying
->
-> What is the output of the closing `ls` command in the sequence shown below?
->
-> ~~~
-> $ pwd
-> ~~~
-> {: .language-bash}
-> ~~~
-> /Users/jamie/data
-> ~~~
-> {: .output}
-> ~~~
-> $ ls
-> ~~~
-> {: .language-bash}
-> ~~~
-> proteins.dat
-> ~~~
-> {: .output}
-> ~~~
-> $ mkdir recombined
-> $ mv proteins.dat recombined/
-> $ cp recombined/proteins.dat ../proteins-saved.dat
-> $ ls
-> ~~~
-> {: .language-bash}
->
->
-> 1.   `proteins-saved.dat recombined`
-> 2.   `recombined`
-> 3.   `proteins.dat recombined`
-> 4.   `proteins-saved.dat`
->
-> > ## Solution
-> > We start in the `/Users/jamie/data` directory, and create a new folder called `recombined`.
-> > The second line moves (`mv`) the file `proteins.dat` to the new folder (`recombined`).
-> > The third line makes a copy of the file we just moved.
-> > The tricky part here is where the file was copied to.
-> > Recall that `..` means 'go up a level', so the copied file is now in `/Users/jamie`.
-> > Notice that `..` is interpreted with respect to the current working
-> > directory, **not** with respect to the location of the file being copied.
-> > So, the only thing that will show using ls (in `/Users/jamie/data`) is the recombined folder.
-> >
-> > 1. No, see explanation above.  `proteins-saved.dat` is located at `/Users/jamie`
-> > 2. Yes
-> > 3. No, see explanation above.  `proteins.dat` is located at `/Users/jamie/data/recombined`
-> > 4. No, see explanation above.  `proteins-saved.dat` is located at `/Users/jamie`
-> {: .solution}
-{: .challenge}
 
 ## Removing files and directories
 
@@ -584,25 +500,6 @@ ls: cannot access 'quotes.txt': No such file or directory
 {: .callout}
 
 
-> ## Using `rm` Safely
->
-> What happens when we execute `rm -i thesis_backup/quotations.txt`?
-> Why would we want this protection when using `rm`?
->
-> > ## Solution
-> > ```
-> > rm: remove regular file 'thesis_backup/quotations.txt'? y
-> > ```
-> > {: .output}
-> > The `-i` option will prompt before (every) removal (use <kbd>Y</kbd> to confirm deletion
-> > or <kbd>N</kbd> to keep the file).
-> > The Unix shell doesn't have a trash bin, so all the files removed will disappear forever.
-> > By using the `-i` option, we have the chance to check that we are deleting only the files
-> > that we want to remove.
-> {: .solution}
-{: .challenge}
-
-
 If we try to remove the `thesis` directory using `rm thesis`,
 we get an error message:
 
@@ -612,9 +509,10 @@ $ rm thesis
 {: .language-bash}
 
 ~~~
-rm: cannot remove `thesis': Is a directory
+rm: cannot remove 'thesis': Is a directory 
 ~~~
 {: .error}
+
 
 This happens because `rm` by default only works on files, not directories.
 
@@ -625,6 +523,7 @@ recursive option `-r`, and it will do so *without any confirmation prompts*:
 $ rm -r thesis
 ~~~
 {: .language-bash}
+
 
 Given that there is no way to retrieve files deleted using the shell,
 `rm -r` *should be used with great caution*
@@ -842,51 +741,6 @@ or specifying a naming pattern using wildcards.
 > {: .solution}
 {: .challenge}
 
-> ## Organizing Directories and Files
->
-> Jamie is working on a project and she sees that her files aren't very well
-> organized:
->
-> ~~~
-> $ ls -F
-> ~~~
-> {: .language-bash}
-> ~~~
-> analyzed/  fructose.dat    raw/   sucrose.dat
-> ~~~
-> {: .output}
->
-> The `fructose.dat` and `sucrose.dat` files contain output from her data
-> analysis. What command(s) covered in this lesson does she need to run
-> so that the commands below will produce the output shown?
->
-> ~~~
-> $ ls -F
-> ~~~
-> {: .language-bash}
-> ~~~
-> analyzed/   raw/
-> ~~~
-> {: .output}
-> ~~~
-> $ ls analyzed
-> ~~~
-> {: .language-bash}
-> ~~~
-> fructose.dat    sucrose.dat
-> ~~~
-> {: .output}
->
-> > ## Solution
-> > ```
-> > mv *.dat analyzed
-> > ```
-> > {: .language-bash}
-> > Jamie needs to move her files `fructose.dat` and `sucrose.dat` to the `analyzed` directory.
-> > The shell will expand *.dat to match all .dat files in the current directory.
-> > The `mv` command then moves the list of .dat files to the 'analyzed' directory.
-> {: .solution}
-{: .challenge}
 
 > ## Reproduce a folder structure
 >
