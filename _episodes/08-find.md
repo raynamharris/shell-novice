@@ -25,10 +25,12 @@ word 'grep'.
 a common sequence of operations in early Unix text editors.
 It is also the name of a very useful command-line program.
 
-`grep` finds and prints lines within files that match a pattern.`find` finds files whose name matches a particular pattern. 
+`grep` finds and prints lines within files that match a pattern. 
+`find` finds files whose name matches a particular pattern. 
 
 
-For this example, let's explore the scripts in Neele's north pacific gyre directory
+For this example, let's explore the scripts in Neele's north pacific 
+gyre directory
 
 ~~~
 $ cd
@@ -117,7 +119,9 @@ goodiff.sh:    echo 0.$RANDOM
 ~~~
 {: .output}
 
-When search for patterns, grep by default will match words that have more character that specified by the pattern. For instance, the pattern "file" is in  "files" and "file1". 
+When search for patterns, grep by default will match words that have more
+character that specified by the pattern. For instance, the pattern "file" 
+is in  "files" and "file1". 
 
 ~~~
 $ grep "file" *sh
@@ -153,7 +157,8 @@ It also helps to make it easier to distinguish between the search term or phrase
 and the file being searched.
 We will use quotes in the remaining examples.
 
-Another useful option is `-n`, which will print the line number were the pattern was found:
+Another useful option is `-n`, which will print the line number
+were the pattern was found:
 
 ~~~
 $ grep -n "file" *.sh
@@ -174,7 +179,8 @@ Here, we can see that lines 5, 9, and 10 contain the letters 'it'.
 We can combine options (i.e. flags) as we do with other Unix commands.
 For example, let's find the lines that contain the word 'the'.
 
-It is often useful to print the lines before or after the line with the matching pattern by adding the options  `-B 1` and `-A 1`. 
+It is often useful to print the lines before or after the line with 
+the matching pattern by adding the options  `-B 1` and `-A 1`. 
 
 ~~~
 $ grep -B 1 -A 1 "echo" *sh

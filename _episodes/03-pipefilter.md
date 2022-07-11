@@ -24,7 +24,9 @@ keypoints:
 Now that we know a few basic commands,
 we can finally look at the shell's most powerful feature:
 the ease with which it lets us combine existing programs in new ways.
-We'll start with the directory `shell-lesson-data/north-pacific-gyre`. This directory contains  17 .txt files that start with "NENE" and two bash scripts.
+We'll start with the directory `shell-lesson-data/north-pacific-gyre`. 
+This directory contains  17 .txt files that start with "NENE" 
+and two bash scripts.
 
 
 
