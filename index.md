@@ -22,9 +22,9 @@ you to this powerful tool.
 
 > ## Useful Links
 > 
-> The workshop website for this event is available at https://indico.cern.ch/event/1159157/.
+> The workshop website for this event is available at <https://indico.cern.ch/event/1159157/>.
 >
-> Notes for this workshop are avilable at https://pad.carpentries.org/2022-07-13-upr-online
+> Notes for this workshop are avilable at <https://pad.carpentries.org/2022-07-13-upr-online>.
 >
 > [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/raynamharris/2022-07-13-upr-online/shell-lessons-data) If have trouble downloading the software and/or data, launch binder to open a terminal in your browser window.
 {: .callout}
