@@ -24,102 +24,94 @@ keypoints:
 Now that we know a few basic commands,
 we can finally look at the shell's most powerful feature:
 the ease with which it lets us combine existing programs in new ways.
-We'll start with the directory `shell-lesson-data/exercise-data/proteins`
-that contains six files describing some simple organic molecules.
-The `.pdb` extension indicates that these files are in Protein Data Bank format,
-a simple text format that specifies the type and position of each atom in the molecule.
+We'll start with the directory `shell-lesson-data/north-pacific-gyre`. This directory contains  17 .txt files that start with "NENE" and two bash scripts.
+
+
 
 ~~~
-$ ls proteins
+$ cd ~/Desktop/shell-lesson-data/north-pacific-gyre
+$ ls 
 ~~~
 {: .language-bash}
 
 ~~~
-cubane.pdb    methane.pdb    pentane.pdb
-ethane.pdb    octane.pdb     propane.pdb
+NENE01729A.txt	NENE01751B.txt	NENE01971Z.txt	NENE02040A.txt	NENE02043B.txt
+NENE01729B.txt	NENE01812A.txt	NENE01978A.txt	NENE02040B.txt	goodiff.sh
+NENE01736A.txt	NENE01843A.txt	NENE01978B.txt	NENE02040Z.txt	goostats.sh
+NENE01751A.txt	NENE01843B.txt	NENE02018B.txt	NENE02043A.txt
 ~~~
 {: .output}
 
-Let's go into that directory with `cd` and run an example  command `wc cubane.pdb`:
+Nelle wants to quickly check the quality of her data. One way to do that is to see if the files are the right size and length.
 
-~~~
-$ cd proteins
-$ wc cubane.pdb
-~~~
-{: .language-bash}
-
-~~~
-20  156 1158 cubane.pdb
-~~~
-{: .output}
 
 `wc` is the 'word count' command:
 it counts the number of lines, words, and characters in files (from left to right, in that order).
 
-If we run the command `wc *.pdb`, the `*` in `*.pdb` matches zero or more characters,
-so the shell turns `*.pdb` into a list of all `.pdb` files in the current directory:
+If we run the command `wc *.txt`, the `*` in `*.txt` matches zero or more characters,
+so the shell turns `*.txt` into a list of all `.txt` files in the current directory:
 
 ~~~
-$ wc *.pdb
+$ wc *.txt
 ~~~
 {: .language-bash}
 
 ~~~
-  20  156  1158  cubane.pdb
-  12  84   622   ethane.pdb
-   9  57   422   methane.pdb
-  30  246  1828  octane.pdb
-  21  165  1226  pentane.pdb
-  15  111  825   propane.pdb
- 107  819  6081  total
+     300     300    4406 NENE01729A.txt
+     300     300    4400 NENE01729B.txt
+     300     300    4371 NENE01736A.txt
+     300     300    4411 NENE01751A.txt
+     300     300    4409 NENE01751B.txt
+     300     300    4401 NENE01812A.txt
+     300     300    4395 NENE01843A.txt
+     300     300    4375 NENE01843B.txt
+     300     300    4372 NENE01971Z.txt
+     300     300    4381 NENE01978A.txt
+     300     300    4389 NENE01978B.txt
+     240     240    3517 NENE02018B.txt
+     300     300    4391 NENE02040A.txt
+     300     300    4367 NENE02040B.txt
+     300     300    4381 NENE02040Z.txt
+     300     300    4386 NENE02043A.txt
+     300     300    4393 NENE02043B.txt
+    5040    5040   73745 total
 ~~~
 {: .output}
 
-Note that `wc *.pdb` also shows the total number of all lines in the last line of the output.
+Note that `wc *.txt` also shows the total number of all lines in the last line of the output.
 
 If we run `wc -l` instead of just `wc`,
 the output shows only the number of lines per file:
 
 ~~~
-$ wc -l *.pdb
+$ wc -l *.txt
 ~~~
 {: .language-bash}
 
 ~~~
-  20  cubane.pdb
-  12  ethane.pdb
-   9  methane.pdb
-  30  octane.pdb
-  21  pentane.pdb
-  15  propane.pdb
- 107  total
+     300 NENE01729A.txt
+     300 NENE01729B.txt
+     300 NENE01736A.txt
+     300 NENE01751A.txt
+     300 NENE01751B.txt
+     300 NENE01812A.txt
+     300 NENE01843A.txt
+     300 NENE01843B.txt
+     300 NENE01971Z.txt
+     300 NENE01978A.txt
+     300 NENE01978B.txt
+     240 NENE02018B.txt
+     300 NENE02040A.txt
+     300 NENE02040B.txt
+     300 NENE02040Z.txt
+     300 NENE02043A.txt
+     300 NENE02043B.txt
+    5040 total
 ~~~
 {: .output}
 
-The `-m` and `-w` options can also be used with the `wc` command, to show
-only the number of characters or the number of words in the files.
-
-> ## Why Isn't It Doing Anything?
->
-> What happens if a command is supposed to process a file, but we
-> don't give it a filename? For example, what if we type:
->
-> ~~~
-> $ wc -l
-> ~~~
-> {: .language-bash}
->
-> but don't type `*.pdb` (or anything else) after the command?
-> Since it doesn't have any filenames, `wc` assumes it is supposed to
-> process input given at the command prompt, so it just sits there and waits for us to give
-> it some data interactively. From the outside, though, all we see is it
-> sitting there: the command doesn't appear to do anything.
->
-> If you make this kind of mistake, you can escape out of this state by holding down
-> the control key (<kbd>Ctrl</kbd>) and typing the letter <kbd>C</kbd> once and
-> letting go of the <kbd>Ctrl</kbd> key.
-> <kbd>Ctrl</kbd>+<kbd>C</kbd>
-{: .callout}
+The `-c` and `-w` options can also be used with the `wc` command, to show
+only the number of characters or words in the files.
 
 
 ## Capturing output from commands
@@ -130,7 +122,7 @@ but what if there were 6000?
 Our first step toward a solution is to run the command:
 
 ~~~
-$ wc -l *.pdb > lengths.txt
+$ wc -l *.txt > lengths.txt
 ~~~
 {: .language-bash}
 
@@ -165,13 +157,24 @@ $ cat lengths.txt
 {: .language-bash}
 
 ~~~
-  20  cubane.pdb
-  12  ethane.pdb
-   9  methane.pdb
-  30  octane.pdb
-  21  pentane.pdb
-  15  propane.pdb
- 107  total
+     300 NENE01729A.txt
+     300 NENE01729B.txt
+     300 NENE01736A.txt
+     300 NENE01751A.txt
+     300 NENE01751B.txt
+     300 NENE01812A.txt
+     300 NENE01843A.txt
+     300 NENE01843B.txt
+     300 NENE01971Z.txt
+     300 NENE01978A.txt
+     300 NENE01978B.txt
+     240 NENE02018B.txt
+     300 NENE02040A.txt
+     300 NENE02040B.txt
+     300 NENE02040Z.txt
+     300 NENE02043A.txt
+     300 NENE02043B.txt
+    5040 total
 ~~~
 {: .output}
 
@@ -189,52 +192,7 @@ $ cat lengths.txt
 
 ## Filtering output
 
-Next we'll use the `sort` command to sort the contents of the `lengths.txt` file.
-But first we'll use an exercise to learn a little about the sort command:
-
-> ## What Does `sort -n` Do?
->
-> The file `shell-lesson-data/exercise-data/numbers.txt` contains the following lines:
->
-> ~~~
-> 10
-> 2
-> 19
-> 22
-> 6
-> ~~~
-> {: .source}
->
-> If we run `sort` on this file, the output is:
->
-> ~~~
-> 10
-> 19
-> 2
-> 22
-> 6
-> ~~~
-> {: .output}
->
-> If we run `sort -n` on the same file, we get this instead:
->
-> ~~~
-> 2
-> 6
-> 10
-> 19
-> 22
-> ~~~
-> {: .output}
->
-> Explain why `-n` has this effect.
->
-> > ## Solution
-> > The `-n` option specifies a numerical rather than an alphanumerical sort.
-> {: .solution}
-{: .challenge}
-
-We will also use the `-n` option to specify that the sort is
+Next we'll use the `sort` command to sort the contents of the `lengths.txt` file. We will use the `-n` option to specify that the sort is
 numerical instead of alphanumerical.
 This does *not* change the file;
 instead, it sends the sorted result to the screen:
@@ -245,16 +203,29 @@ $ sort -n lengths.txt
 {: .language-bash}
 
 ~~~
-  9  methane.pdb
- 12  ethane.pdb
- 15  propane.pdb
- 20  cubane.pdb
- 21  pentane.pdb
- 30  octane.pdb
-107  total
+     240 NENE02018B.txt
+     300 NENE01729A.txt
+     300 NENE01729B.txt
+     300 NENE01736A.txt
+     300 NENE01751A.txt
+     300 NENE01751B.txt
+     300 NENE01812A.txt
+     300 NENE01843A.txt
+     300 NENE01843B.txt
+     300 NENE01971Z.txt
+     300 NENE01978A.txt
+     300 NENE01978B.txt
+     300 NENE02040A.txt
+     300 NENE02040B.txt
+     300 NENE02040Z.txt
+     300 NENE02043A.txt
+     300 NENE02043B.txt
+    5040 total
 ~~~
 {: .output}
 
+
+Now, we can easily see that one file is shorter than the rest.
 
 We can put the sorted list of lines in another temporary file called `sorted-lengths.txt`
 by putting `> sorted-lengths.txt` after the command,
@@ -269,9 +240,11 @@ $ head -n 1 sorted-lengths.txt
 {: .language-bash}
 
 ~~~
-  9  methane.pdb
+  240 NENE02018B.txt
 ~~~
 {: .output}
+
+This tells us which file is shorter than the rest. 
 
 Using `-n 1` with `head` tells it that
 we only want the first line of the file;
@@ -383,7 +356,7 @@ $ sort -n lengths.txt | head -n 1
 {: .language-bash}
 
 ~~~
-  9  methane.pdb
+  240 NENE02018B.txt
 ~~~
 {: .output}
 
@@ -395,6 +368,7 @@ as the input to the command on the right.
 This has removed the need for the `sorted-lengths.txt` file.
 
 ## Combining multiple commands
+
 Nothing prevents us from chaining pipes consecutively.
 We can for example send the output of `wc` directly to `sort`,
 and then the resulting output to `head`.
@@ -403,37 +377,46 @@ This removes the need for any intermediate files.
 We'll start by using a pipe to send the output of `wc` to `sort`:
 
 ~~~
-$ wc -l *.pdb | sort -n
+$ wc -l *.txt | sort -n
 ~~~
 {: .language-bash}
 
 ~~~
-   9 methane.pdb
-  12 ethane.pdb
-  15 propane.pdb
-  20 cubane.pdb
-  21 pentane.pdb
-  30 octane.pdb
- 107 total
+      18 lengths.txt
+      18 sorted-lengths.txt
+     240 NENE02018B.txt
+     300 NENE01729A.txt
+     300 NENE01729B.txt
+     300 NENE01736A.txt
+     300 NENE01751A.txt
+     300 NENE01751B.txt
+     300 NENE01812A.txt
+     300 NENE01843A.txt
+     300 NENE01843B.txt
+     300 NENE01971Z.txt
+     300 NENE01978A.txt
+     300 NENE01978B.txt
+     300 NENE02040A.txt
+     300 NENE02040B.txt
+     300 NENE02040Z.txt
+     300 NENE02043A.txt
+     300 NENE02043B.txt
+    5076 total
 ~~~
 {: .output}
 
 We can then send that output through another pipe, to `head`, so that the full pipeline becomes:
 
 ~~~
-$ wc -l *.pdb | sort -n | head -n 1
+$ wc -l NENE*.txt | sort -n | head -n 1
 ~~~
 {: .language-bash}
 
 ~~~
-   9  methane.pdb
+240 NENE02018B.txt
+
 ~~~
 {: .output}
-
-This is exactly like a mathematician nesting functions like *log(3x)*
-and saying 'the log of three times *x*'.
-In our case,
-the calculation is 'head of sort of line count of `*.pdb`'.
 
 
 The redirection and pipes used in the last few commands are illustrated below:
@@ -466,6 +449,7 @@ the "sort" command is the input to the "head" command and the output of the
 
 
 ## Tools designed to work together
+
 This idea of linking programs together is why Unix has been so successful.
 Instead of creating enormous programs that try to do many different things,
 Unix programmers focus on creating lots of simple tools that each do one job well,
@@ -487,189 +471,11 @@ You can *and should* write your programs this way
 so that you and other people can put those programs into pipes to multiply their power.
 
 
-> ## Pipe Reading Comprehension
->
-> A file called `animals.csv` (in the `shell-lesson-data/exercise-data/animal-counts` folder)
-> contains the following data:
->
-> ~~~
-> 2012-11-05,deer,5
-> 2012-11-05,rabbit,22
-> 2012-11-05,raccoon,7
-> 2012-11-06,rabbit,19
-> 2012-11-06,deer,2
-> 2012-11-06,fox,4
-> 2012-11-07,rabbit,16
-> 2012-11-07,bear,1
-> ~~~
-> {: .source}
->
-> What text passes through each of the pipes and the final redirect in the pipeline below?
-> Note, the `sort -r` command sorts in reverse order.
->
-> ~~~
-> $ cat animals.csv | head -n 5 | tail -n 3 | sort -r > final.txt
-> ~~~
-> {: .language-bash}
-> Hint: build the pipeline up one command at a time to test your understanding
-> > ## Solution
-> > The `head` command extracts the first 5 lines from `animals.csv`.
-> > Then, the last 3 lines are extracted from the previous 5 by using the `tail` command.
-> > With the `sort -r` command those 3 lines are sorted in reverse order and finally,
-> > the output is redirected to a file `final.txt`.
-> > The content of this file can be checked by executing `cat final.txt`.
-> > The file should contain the following lines:
-> > ```
-> > 2012-11-06,rabbit,19
-> > 2012-11-06,deer,2
-> > 2012-11-05,raccoon,7
-> > ```
-> > {: .source}
-> {: .solution}
-{: .challenge}
+## Checking for unusual file names
 
-> ## Pipe Construction
->
-> For the file `animals.csv` from the previous exercise, consider the following command:
->
-> ~~~
-> $ cut -d , -f 2 animals.csv
-> ~~~
-> {: .language-bash}
->
-> The `cut` command is used to remove or 'cut out' certain sections of each line in the file,
-> and `cut` expects the lines to be separated into columns by a <kbd>Tab</kbd> character.
-> A character used in this way is a called a **delimiter**.
-> In the example above we use the `-d` option to specify the comma as our delimiter character.
-> We have also used the `-f` option to specify that we want to extract the second field (column).
-> This gives the following output:
->
-> ~~~
-> deer
-> rabbit
-> raccoon
-> rabbit
-> deer
-> fox
-> rabbit
-> bear
-> ~~~
-> {: .output}
->
-> The `uniq` command filters out adjacent matching lines in a file.
-> How could you extend this pipeline (using `uniq` and another command) to find
-> out what animals the file contains (without any duplicates in their
-> names)?
->
-> > ## Solution
-> > ```
-> > $ cut -d , -f 2 animals.csv | sort | uniq
-> > ```
-> > {: .language-bash}
-> {: .solution}
-{: .challenge}
 
-> ## Which Pipe?
->
-> The file `animals.csv` contains 8 lines of data formatted as follows:
->
-> ~~~
-> 2012-11-05,deer,5
-> 2012-11-05,rabbit,22
-> 2012-11-05,raccoon,7
-> 2012-11-06,rabbit,19
-> ...
-> ~~~
-> {: .output}
->
-> The `uniq` command has a `-c` option which gives a count of the
-> number of times a line occurs in its input.  Assuming your current
-> directory is `shell-lesson-data/exercise-data/animal-counts`, 
-> what command would you use to produce a table that shows
-> the total count of each type of animal in the file?
->
-> 1.  `sort animals.csv | uniq -c`
-> 2.  `sort -t, -k2,2 animals.csv | uniq -c`
-> 3.  `cut -d, -f 2 animals.csv | uniq -c`
-> 4.  `cut -d, -f 2 animals.csv | sort | uniq -c`
-> 5.  `cut -d, -f 2 animals.csv | sort | uniq -c | wc -l`
->
-> > ## Solution
-> > Option 4. is the correct answer.
-> > If you have difficulty understanding why, try running the commands, or sub-sections of
-> > the pipelines (make sure you are in the `shell-lesson-data/exercise-data/animal-counts` 
-> > directory).
-> {: .solution}
-{: .challenge}
+Did you notice that most but not all files are names A or B but two are named Z?
 
-## Nelle's Pipeline: Checking Files
-
-Nelle has run her samples through the assay machines
-and created 17 files in the `north-pacific-gyre` directory described earlier.
-As a quick check, starting from the `shell-lesson-data` directory, Nelle types:
-
-~~~
-$ cd north-pacific-gyre
-$ wc -l *.txt
-~~~
-{: .language-bash}
-
-The output is 18 lines that look like this:
-
-~~~
-300 NENE01729A.txt
-300 NENE01729B.txt
-300 NENE01736A.txt
-300 NENE01751A.txt
-300 NENE01751B.txt
-300 NENE01812A.txt
-... ...
-~~~
-{: .output}
-
-Now she types this:
-
-~~~
-$ wc -l *.txt | sort -n | head -n 5
-~~~
-{: .language-bash}
-
-~~~
- 240 NENE02018B.txt
- 300 NENE01729A.txt
- 300 NENE01729B.txt
- 300 NENE01736A.txt
- 300 NENE01751A.txt
-~~~
-{: .output}
-
-Whoops: one of the files is 60 lines shorter than the others.
-When she goes back and checks it,
-she sees that she did that assay at 8:00 on a Monday morning --- someone
-was probably in using the machine on the weekend,
-and she forgot to reset it.
-Before re-running that sample,
-she checks to see if any files have too much data:
-
-~~~
-$ wc -l *.txt | sort -n | tail -n 5
-~~~
-{: .language-bash}
-
-~~~
- 300 NENE02040B.txt
- 300 NENE02040Z.txt
- 300 NENE02043A.txt
- 300 NENE02043B.txt
-5040 total
-~~~
-{: .output}
-
-Those numbers look good --- but what's that 'Z' doing there in the third-to-last line?
-All of her samples should be marked 'A' or 'B';
-by convention,
-her lab uses 'Z' to indicate samples with missing information.
-To find others like it, she does this:
 
 ~~~
 $ ls *Z.txt
