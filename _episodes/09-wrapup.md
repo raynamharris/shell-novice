@@ -8,9 +8,7 @@ questions:
 objectives:
 - "See a history of what you learned today"
 keypoints:
-- "Use `history` to see all the commands you typed recently"
-- "Use `history | grep "grep"` to see all the patterns you searched for recently"
-
+- "Use history to see all the commands you typed recently"
 ---
 
 Here is a summary of all the commands we typed today:
