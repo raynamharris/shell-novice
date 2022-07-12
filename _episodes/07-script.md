@@ -33,12 +33,11 @@ If you come back to your work later (or if someone else finds your work and want
 you will be able to reproduce the same results simply by running your script,
 rather than having to remember or retype a long list of commands.
 
-Let's start by going back to `proteins/` and creating a new file, `middle.sh` which will
-become our shell script:
+Before the break, you learned how to combine commands with the pipte
 
 ~~~
-$ cd proteins
-$ nano middle.sh
+$ cd ~/Desktp/shell-lesson-data/north-pacific-gyre
+$ wc -l NENE01729A.txt | sort -n | head -n 1
 ~~~
 {: .language-bash}
 

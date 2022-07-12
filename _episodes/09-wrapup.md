@@ -17,14 +17,13 @@ Here is a summary of all the commands we typed today:
 
 
 ```
-# Intro
+# Introduction
 
 
-$
 $ ls
 
 
-# Files and Directories
+# Navigating directories
 
 
 $ pwd
@@ -101,47 +100,37 @@ $ rm results
 $ rm -r results
 
 
-# Scripts
-
-
-$ cd proteins
-$ nano middle.sh
-$ bash middle.sh
-$ nano middle.sh
-$ bash middle.sh octane.pdb
-$ bash middle.sh pentane.pdb
-$ nano middle.sh
-$ bash middle.sh pentane.pdb 15 5
-$ bash middle.sh pentane.pdb 20 5
-$ nano middle.sh
-$ wc -l *.pdb | sort -n
-$ nano sorted.sh
-$ bash sorted.sh *.pdb ../creatures/*.dat
-$ history | tail -n 5 > redo-figure-3.sh
-$ cd ../../north-pacific-gyre/
-$ nano do-stats.sh
-$ bash do-stats.sh NENE*A.txt NENE*B.txt
-$ bash do-stats.sh NENE*A.txt NENE*B.txt | wc -l
-
+# Break
 
 # Loops
 
-$ head -n 5 basilisk.dat minotaur.dat unicorn.dat
-$ for filename in basilisk.dat minotaur.dat unicorn.dat
-$ for x in basilisk.dat minotaur.dat unicorn.dat
-$ for temperature in basilisk.dat minotaur.dat unicorn.dat
-$ for filename in *.dat
+
+$ wc -l NENE*[AB].txt | sort -n   | head -n 1
+$ sort -n  NENE*.txt | head -n 1
+$ for file in NENE*[AB].txt
+$ for file in NENE*[AB].txt
+$ for x in NENE*txt
+$ for file in NENE*[AB].txt
 $ echo hello there
-$ for filename in *.dat
-$ cp *.dat original-*.dat
-$ cp basilisk.dat minotaur.dat unicorn.dat original-*.dat
-$ for filename in *.dat
+$ cp *.txt raw-*.txt
+$ for file in NENE*.txt
+$ for file in NENE*.txt
 $ cd north-pacific-gyre
 $ for datafile in NENE*A.txt NENE*B.txt
 $ for datafile in NENE*A.txt NENE*B.txt
 $ for datafile in NENE*A.txt NENE*B.txt; do echo $datafile stats-$datafile; done
 $ for datafile in NENE*A.txt NENE*B.txt; do bash goostats.sh $datafile stats-$datafile; done
 $ for datafile in NENE*A.txt NENE*B.txt; do echo $datafile;
+
+
+# Scripts
+
+
+$ cd ~/Desktp/shell-lesson-data/north-pacific-gyre
+$ wc -l NENE01729A.txt | sort -n | head -n 1
+$ nano do-stats.sh
+$ bash do-stats.sh NENE*A.txt NENE*B.txt
+$ bash do-stats.sh NENE*A.txt NENE*B.txt | wc -l
 
 
 # Finding things
@@ -162,13 +151,9 @@ $ find .
 $ find . -type d
 $ find . -type f
 $ find . -name *.txt
-$ find . -name numbers.txt
 $ find . -name "*.txt"
 $ wc -l $(find . -name "*.txt")
-$ wc -l ./writing/LittleWomen.txt ./writing/haiku.txt ./numbers.txt
 $ grep "searching" $(find . -name "*.txt")
-
-
 
 ```
 {: .language-bash}

@@ -24,34 +24,43 @@ keypoints:
 
 **Loops** are a programming construct which allow us to repeat a command or set of commands
 for each item in a list.
+
 As such they are key to productivity improvements through automation.
 Similar to wildcards and tab completion, using loops also reduces the
 amount of typing required (and hence reduces the number of typing mistakes).
 
-Suppose we have several hundred genome data files named `basilisk.dat`, `minotaur.dat`, and
-`unicorn.dat`.
-For this example, we'll use the `exercise-data/creatures` directory which only has three
-example files,
-but the principles can be applied to many many more files at once.
 
-The structure of these files is the same: the common name, classification, and updated date are
-presented on the first three lines, with DNA sequences on the following lines.
-Let's look at the files:
+In a previous lesson, we learned how to pipe together commands 
+to identify the smallest file. 
+
 
 ```
-$ head -n 5 basilisk.dat minotaur.dat unicorn.dat
+$ wc -l NENE*[AB].txt | sort -n   | head -n 1
 ```
 {: .language-bash}
 
-We would like to print out the classification for each species, which is given on the second
-line of each file.
-For each file, we would need to execute the command `head -n 2` and pipe this to `tail -n 1`.
-We’ll use a loop to solve this problem, but first let’s look at the general form of a loop:
+
+If you want to find the smallest entry within each file, you might try
+the following command. This will give you the smallest entry
+in all the files, but not the smallest entry in every file
+
+```
+$ sort -n  NENE*.txt | head -n 1
+```
+{: .language-bash}
+
+
+```
+0.000422950082062
+```
+{: .output}
+
+For that task, we need a for loop. Shell loops look like this:
 
 ```
 for thing in list_of_things
 do
-    operation_using $thing    # Indentation within the loop is not required, but aids legibility
+    operation_using $thing    # indentation is nice but not required
 done
 ```
 {: .language-bash}
@@ -59,19 +68,78 @@ done
 and we can apply this to our example like this:
 
 ```
-$ for filename in basilisk.dat minotaur.dat unicorn.dat
+$ for file in NENE*[AB].txt
 > do
->     head -n 2 $filename | tail -n 1
+>      sort -n $file | head -n 1
 > done
 ```
 {: .language-bash}
 
 ```
-CLASSIFICATION: basiliscus vulgaris
-CLASSIFICATION: bos hominus
-CLASSIFICATION: equus monoceros
+0.000727104356379
+0.000422950082062
+0.00140262849244
+0.00194535354186
+0.00224050924249
+0.00278053248724
+0.00551482529612
+0.00284069578473
+0.00112536860837
+0.00487842954972
+0.00464520333826
+0.00180611947072
+0.00428143068209
+0.0071650810371
 ```
 {: .output}
+
+
+Sometimes it's nice to add an echo statment so you know what file is being processed
+
+```
+$ for file in NENE*[AB].txt
+> do
+>      echo $file 
+>      sort -n $file | head -n 1
+> done
+```
+{: .language-bash}
+
+
+
+```
+NENE01729A.txt
+0.000727104356379
+NENE01729B.txt
+0.000422950082062
+NENE01736A.txt
+0.00140262849244
+NENE01751A.txt
+0.00194535354186
+NENE01751B.txt
+0.00224050924249
+NENE01812A.txt
+0.00278053248724
+NENE01843A.txt
+0.00551482529612
+NENE01843B.txt
+0.00284069578473
+NENE01978A.txt
+0.00112536860837
+NENE01978B.txt
+0.00487842954972
+NENE02040A.txt
+0.00464520333826
+NENE02040B.txt
+0.00180611947072
+NENE02043A.txt
+0.00428143068209
+NENE02043B.txt
+0.0071650810371
+```
+{: .output}
+
+
 
 
 > ## Follow the Prompt
@@ -93,22 +161,6 @@ The `$` tells the shell interpreter to treat
 the variable as a variable name and substitute its value in its place,
 rather than treat it as text or an external command.
 
-In this example, the list is three filenames: `basilisk.dat`, `minotaur.dat`, and `unicorn.dat`.
-Each time the loop iterates, it will assign a file name to the variable `filename`
-and run the `head` command.
-The first time through the loop,
-`$filename` is `basilisk.dat`.
-The interpreter runs the command `head` on `basilisk.dat`
-and pipes the first two lines to the `tail` command,
-which then prints the second line of `basilisk.dat`.
-For the second iteration, `$filename` becomes
-`minotaur.dat`. This time, the shell runs `head` on `minotaur.dat`
-and pipes the first two lines to the `tail` command,
-which then prints the second line of `minotaur.dat`.
-For the third iteration, `$filename` becomes
-`unicorn.dat`, so the shell runs the `head` command on that file,
-and `tail` on the output of that.
-Since the list was only three items, the shell exits the `for` loop.
 
 > ## Same Symbols, Different Meanings
 >
@@ -126,41 +178,27 @@ Since the list was only three items, the shell exits the `for` loop.
 
 When using variables it is also
 possible to put the names into curly braces to clearly delimit the variable
-name: `$filename` is equivalent to `${filename}`, but is different from
-`${file}name`. You may find this notation in other people's programs.
+name: `$file` is equivalent to `${file}`. 
+You may find this notation in other people's programs.
 
-We have called the variable in this loop `filename`
+We have called the variable in this loop `file`
 in order to make its purpose clearer to human readers.
 The shell itself doesn't care what the variable is called;
 if we wrote this loop as:
 
 ~~~
-$ for x in basilisk.dat minotaur.dat unicorn.dat
+$ for x in NENE*txt
 > do
 >     head -n 2 $x | tail -n 1
 > done
 ~~~
 {: .language-bash}
 
-or:
 
-~~~
-$ for temperature in basilisk.dat minotaur.dat unicorn.dat
-> do
->     head -n 2 $temperature | tail -n 1
-> done
-~~~
-{: .language-bash}
-
-it would work exactly the same way.
-*Don't do this.*
 Programs are only useful if people can understand them,
 so meaningless names (like `x`) or misleading names (like `temperature`)
 increase the odds that the program won't do what its readers think it does.
 
-In the above examples, the variables (`thing`, `filename`, `x` and `temperature`)
-could have been given any other name, as long as it is meaningful to both the person
-writing the code and the person reading it.
 
 Note also that loops can be used for other things than filenames, like a list of numbers
 or a subset of data.
@@ -370,19 +408,20 @@ or a subset of data.
 > {: .solution}
 {: .challenge}
 
-Let's continue with our example in the `shell-lesson-data/exercise-data/creatures` directory.
+Let's continue with our example.
 Here's a slightly more complicated loop:
 
 ~~~
-$ for filename in *.dat
+$ for file in NENE*[AB].txt
 > do
->     echo $filename
->     head -n 100 $filename | tail -n 20
+>     echo $file
+>     head -3 $file
 > done
 ~~~
 {: .language-bash}
 
-The shell starts by expanding `*.dat` to create the list of files it will process.
+The shell starts by expanding `*.txt` to create the list of files 
+it will process.
 The **loop body**
 then executes two commands for each of those files.
 The first command, `echo`, prints its command-line arguments to standard output.
@@ -400,27 +439,6 @@ hello there
 ~~~
 {: .output}
 
-In this case,
-since the shell expands `$filename` to be the name of a file,
-`echo $filename` prints the name of the file.
-Note that we can't write this as:
-
-~~~
-$ for filename in *.dat
-> do
->     $filename
->     head -n 100 $filename | tail -n 20
-> done
-~~~
-{: .language-bash}
-
-because then the first time through the loop,
-when `$filename` expanded to `basilisk.dat`, the shell would try to run `basilisk.dat` as
-a program.
-Finally,
-the `head` and `tail` combination selects lines 81-100
-from whatever file is being processed
-(assuming the file has at least 100 lines).
 
 > ## Spaces in Names
 >
@@ -480,67 +498,85 @@ of the original files, naming the copies `original-basilisk.dat` and `original-u
 We can't use:
 
 ~~~
-$ cp *.dat original-*.dat
+$ cp *.txt raw-*.txt
 ~~~
 {: .language-bash}
 
-because that would expand to:
+because that would expand incorrectly.
 
-~~~
-$ cp basilisk.dat minotaur.dat unicorn.dat original-*.dat
-~~~
-{: .language-bash}
 
-This wouldn't back up our files, instead we get an error:
-
-~~~
-cp: target `original-*.dat' is not a directory
-~~~
-{: .error}
-
-This problem arises when `cp` receives more than two inputs. When this happens, it
-expects the last input to be a directory where it can copy all the files it was passed.
-Since there is no directory named `original-*.dat` in the `creatures` directory we get an
-error.
+This problem arises when `cp` receives more than one inputs. 
+When this happens, itexpects the last input to be a directory
+where it can copy all the files it was passed.
+Since there is no directory named `original-*.dat` 
+in the `creatures` directory we get an error.
 
 Instead, we can use a loop:
+
 ~~~
-$ for filename in *.dat
+$ for file in NENE*.txt
 > do
->     cp $filename original-$filename
+>     cp $file raw-$file
 > done
 ~~~
 {: .language-bash}
 
 This loop runs the `cp` command once for each filename.
 The first time,
-when `$filename` expands to `basilisk.dat`,
+when `$file` expands to `NENE01729A.txt`,
 the shell executes:
 
 ~~~
-cp basilisk.dat original-basilisk.dat
+cp NENE01729A.txt raw-NENE01729A.txt
 ~~~
 {: .language-bash}
 
 The second time, the command is:
 
 ~~~
-cp minotaur.dat original-minotaur.dat
+cp NENE01729B.txt raw-NENE01729B.txt
 ~~~
 {: .language-bash}
 
-The third and last time, the command is:
 
-~~~
-cp unicorn.dat original-unicorn.dat
-~~~
-{: .language-bash}
 
 Since the `cp` command does not normally produce any output, it's hard to check
 that the loop is doing the correct thing.
 However, we learned earlier how to print strings using `echo`, and we can modify the loop
 to use `echo` to print our commands without actually executing them.
 As such we can check what commands *would be* run in the unmodified loop.
+
+~~~
+$ for file in NENE*.txt
+> do
+>     echo $file raw-$file
+>     cp $file raw-$file
+> done
+~~~
+{: .language-bash}
+
+
+
+```
+NENE01729A.txt raw-NENE01729A.txt
+NENE01729B.txt raw-NENE01729B.txt
+NENE01736A.txt raw-NENE01736A.txt
+NENE01751A.txt raw-NENE01751A.txt
+NENE01751B.txt raw-NENE01751B.txt
+NENE01812A.txt raw-NENE01812A.txt
+NENE01843A.txt raw-NENE01843A.txt
+NENE01843B.txt raw-NENE01843B.txt
+NENE01971Z.txt raw-NENE01971Z.txt
+NENE01978A.txt raw-NENE01978A.txt
+NENE01978B.txt raw-NENE01978B.txt
+NENE02040A.txt raw-NENE02040A.txt
+NENE02040B.txt raw-NENE02040B.txt
+NENE02043A.txt raw-NENE02043A.txt
+NENE02043B.txt raw-NENE02043B.txt
+```
+{: .output}
+
+
 
 The following diagram
 shows what happens when the modified loop is executed, and demonstrates how the
@@ -555,7 +591,7 @@ lines: "cp basislisk.dat original-basilisk.dat", then "cp minotaur.dat
 original-minotaur.dat" and finally "cp unicorn.dat
 original-unicorn.dat"](../fig/shell_script_for_loop_flow_chart.svg)
 
-## Nelle's Pipeline: Processing Files
+## Processing Files
 
 Nelle is now ready to process her data files using `goostats.sh` ---
 a shell script written by her supervisor.
