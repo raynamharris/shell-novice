@@ -13,14 +13,15 @@ Use of the shell is fundamental to a wide range of advanced computing
 tasks, including high-performance computing. These lessons will introduce
 you to this powerful tool.
 
-## Useful Links
+### Useful Links
+
 
 The workshop website for this event is available at
  <https://indico.cern.ch/event/1159157/>.
 
 Please watch the pre-workshop videos for installaion tips at 
 <https://indico.cern.ch/event/1159157/page/25297-pre-requisites>.
- 
+
 Please **download the data** for the lesson as described on the **Setup** page.
 
 Notes for this workshop are avilable at 
