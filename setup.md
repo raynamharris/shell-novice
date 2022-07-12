@@ -23,7 +23,8 @@ You need to download some files to follow this lesson.
 
 ## Install software
 If you do not already have the shell software installed, you will need to
-[download and install][install_shell] it.
+download and install it. Instructions are provided below. You can also
+watch [these videos](https://indico.cern.ch/event/1159157/page/25297-pre-requisites).
 
 ## Open a new shell
 After installing the software
