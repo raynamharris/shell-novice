@@ -7,10 +7,11 @@ root: .
 
 ## Surveys
 
-Please be sure to complete these surveys before the workshop.
-
-[Pre-workshop Survey](https://carpentries.typeform.com/to/wi32rS?slug=2022-07-13-upr-online)
-
+Please be sure to complete the [Pre-workshop 
+Survey](https://carpentries.typeform.com/to/wi32rS?slug=2022-07-13-upr-online) 
+before the workshop and the [Post-workshop 
+Survey](https://carpentries.typeform.com/to/UgVdRQ?slug=2022-07-13-upr-online)
+after the workshop.
 
 ## Download files
 You need to download some files to follow this lesson.
