@@ -11,6 +11,8 @@ keypoints:
 - "Use history to see all the commands you typed recently"
 ---
 
+## Appendix
+
 Here is a summary of all the commands we typed today:
 
 
@@ -54,6 +56,23 @@ ls north-pacific-gyre/goostats.sh
 
 ```
 {: .language-bash}
+
+
+## History
+
+To view all the commands you typed recently, use the command `history`. 
+
+```
+history
+```
+{: .language-bash}
+
+
+## Surveys
+
+Please complete this survey on Friday
+
+[Post-workshop Survey](https://carpentries.typeform.com/to/UgVdRQ?slug=2022-07-13-upr-online)
 
 
 {% include links.md %}
