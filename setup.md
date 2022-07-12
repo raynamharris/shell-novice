@@ -4,6 +4,14 @@ title: Setup
 root: .
 ---
 
+
+## Surveys
+
+Please be sure to complete these surveys before the workshop.
+
+[Pre-workshop Survey](https://carpentries.typeform.com/to/wi32rS?slug=2022-07-13-upr-online)
+
+
 ## Download files
 You need to download some files to follow this lesson.
 
