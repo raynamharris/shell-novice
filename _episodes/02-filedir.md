@@ -145,6 +145,56 @@ Desktop      Downloads    Movies       Pictures
 (Again, your results may be slightly different depending on your operating
 system and how you have customized your filesystem.)
 
+
+## General Syntax of a Shell Command
+
+We have now encountered commands, options, and arguments,
+but it is perhaps useful to formalise some terminology.
+
+Consider the command below as a general example of a command,
+which we will dissect into its component parts:
+
+~~~
+$ ls -F /
+~~~
+{: .language-bash}
+
+![General syntax of a shell command](../fig/shell_command_syntax.svg)
+
+`ls` is the **command**, with an **option** `-F` and an
+**argument** `/`.
+We've already encountered options  which
+either start with a single dash (`-`) or two dashes (`--`),
+and they change the behavior of a command.
+[Arguments] tell the command what to operate on (e.g. files and directories).
+Sometimes options and arguments are referred to as **parameters**.
+A command can be called with more than one option and more than one argument, but a
+command doesn't always require an argument or an option.
+
+You might sometimes see options being referred to as **switches** or **flags**,
+especially for options that take no argument. In this lesson we will stick with
+using the term *option*.
+
+Each part is separated by spaces: if you omit the space
+between `ls` and `-F` the shell will look for a command called `ls-F`, which
+doesn't exist. 
+
+Putting all that together, our command above gives us a listing
+of files and directories in the root directory `/`.
+An example of the output you might get from the above command is given below:
+
+~~~
+$ ls -F /
+~~~
+{: .language-bash}
+
+~~~
+Applications/         System/
+Library/              Users/
+Network/              Volumes/
+~~~
+{: .output}
+
 `ls` prints the names of the files and directories in the current directory.
 We can make its output more comprehensible by using the `-F` **option**
 which tells `ls` to classify the output
@@ -594,6 +644,9 @@ $ cd /Users/nelle/Desktop/shell-lesson-data
 
 Run `pwd` and `ls` to ensure that we're in the directory we expect.
 
+
+
+
 > ## Two More Shortcuts
 >
 > The shell interprets a tilde (`~`) character at the start of a path to
@@ -666,93 +719,6 @@ Run `pwd` and `ls` to ensure that we're in the directory we expect.
 
 
 
-
-
-## General Syntax of a Shell Command
-We have now encountered commands, options, and arguments,
-but it is perhaps useful to formalise some terminology.
-
-Consider the command below as a general example of a command,
-which we will dissect into its component parts:
-
-~~~
-$ ls -F /
-~~~
-{: .language-bash}
-
-![General syntax of a shell command](../fig/shell_command_syntax.svg)
-
-`ls` is the **command**, with an **option** `-F` and an
-**argument** `/`.
-We've already encountered options  which
-either start with a single dash (`-`) or two dashes (`--`),
-and they change the behavior of a command.
-[Arguments] tell the command what to operate on (e.g. files and directories).
-Sometimes options and arguments are referred to as **parameters**.
-A command can be called with more than one option and more than one argument, but a
-command doesn't always require an argument or an option.
-
-You might sometimes see options being referred to as **switches** or **flags**,
-especially for options that take no argument. In this lesson we will stick with
-using the term *option*.
-
-Each part is separated by spaces: if you omit the space
-between `ls` and `-F` the shell will look for a command called `ls-F`, which
-doesn't exist. Also, capitalization can be important.
-For example, `ls -s` will display the size of files and directories alongside the names,
-while `ls -S` will sort the files and directories by size, as shown below:
-
-~~~
-$ cd ~/Desktop/shell-lesson-data
-$ ls -s north-pacific-gyre
-~~~
-{: .language-bash}
-
-~~~
-total 272
-16 NENE01729A.txt	16 NENE01978A.txt
-16 NENE01729B.txt	16 NENE01978B.txt
-16 NENE01736A.txt	16 NENE02040A.txt
-16 NENE01751A.txt	16 NENE02040B.txt
-16 NENE01751B.txt	16 NENE02040Z.txt
-16 NENE01812A.txt	16 NENE02043A.txt
-16 NENE01843A.txt	16 NENE02043B.txt
-16 NENE01843B.txt	 8 goodiff.sh
-16 NENE01971Z.txt	 8 goostats.sh
-~~~
-{: .output}
-
-~~~
-$ ls -S exercise-data
-~~~
-{: .language-bash}
-
-~~~
-NENE01751A.txt	NENE01843A.txt	NENE01978A.txt	NENE02040B.txt
-NENE01751B.txt	NENE02043B.txt	NENE02040Z.txt	goodiff.sh
-NENE01729A.txt	NENE02040A.txt	NENE01843B.txt	goostats.sh
-NENE01812A.txt	NENE01978B.txt	NENE01971Z.txt
-NENE01729B.txt	NENE02043A.txt	NENE01736A.txt
-~~~
-{: .output}
-
-Putting all that together, our command above gives us a listing
-of files and directories in the root directory `/`.
-An example of the output you might get from the above command is given below:
-
-~~~
-$ ls -F /
-~~~
-{: .language-bash}
-
-~~~
-Applications/         System/
-Library/              Users/
-Network/              Volumes/
-~~~
-{: .output}
-
-
 ### Nelle's Pipeline: Organizing Files
 
 Knowing this much about files and directories,
@@ -822,6 +788,43 @@ goodiff.sh   goostats.sh
 
 This is called **tab completion**,
 and we will see it in many other tools as we go on.
+
+Finally, remember that capitalization is  important.
+For example, `ls -s` will display the size of files and directories alongside the names,
+while `ls -S` will sort the files and directories by size, as shown below:
+
+~~~
+$ ls -s north-pacific-gyre
+~~~
+{: .language-bash}
+
+~~~
+total 272
+16 NENE01729A.txt	16 NENE01978A.txt
+16 NENE01729B.txt	16 NENE01978B.txt
+16 NENE01736A.txt	16 NENE02040A.txt
+16 NENE01751A.txt	16 NENE02040B.txt
+16 NENE01751B.txt	16 NENE02040Z.txt
+16 NENE01812A.txt	16 NENE02043A.txt
+16 NENE01843A.txt	16 NENE02043B.txt
+16 NENE01843B.txt	 8 goodiff.sh
+16 NENE01971Z.txt	 8 goostats.sh
+~~~
+{: .output}
+
+~~~
+$ ls -S north-pacific-gyre
+~~~
+{: .language-bash}
+
+~~~
+NENE01751A.txt	NENE01843A.txt	NENE01978A.txt	NENE02040B.txt
+NENE01751B.txt	NENE02043B.txt	NENE02040Z.txt	goodiff.sh
+NENE01729A.txt	NENE02040A.txt	NENE01843B.txt	goostats.sh
+NENE01812A.txt	NENE01978B.txt	NENE01971Z.txt
+NENE01729B.txt	NENE02043A.txt	NENE01736A.txt
+~~~
+{: .output}
 
 [Arguments]: https://swcarpentry.github.io/shell-novice/reference.html#argument
 
