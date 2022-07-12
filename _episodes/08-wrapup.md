@@ -1,6 +1,6 @@
 ---
 title: "Wrap-Up"
-teaching: 0
+teaching: 5
 exercises: 0
 questions:
 - "What did we learn today?"
