@@ -17,8 +17,12 @@ Here is a summary of all the commands we typed today:
 
 
 ```
+# intro
+
 ls
 ks
+
+# fil dir
 
 pwd
 ls
@@ -53,6 +57,25 @@ ls north-pacific-gyre/
 ls north-pacific-gyre/
 ls north-pacific-gyre/goostats.sh
 
+# pipe filter
+
+
+sort -n lengths.txt > sorted-lengths.txt
+
+# create
+
+pwd
+cd ~/Desktop/shell-lesson-data/north-pacific-gyre
+
+# script
+
+# loop
+
+# find
+
+# wrap up
+
+history
 
 ```
 {: .language-bash}

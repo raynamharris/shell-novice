@@ -23,15 +23,13 @@ keypoints:
 ---
 
 ## Creating directories
+
 We now know how to explore files and directories,
 but how do we create them in the first place?
 
-In this episode we will learn about creating and moving files and directories,
-using the `exercise-data/writing` directory as an example.
 
-### Step one: see where we are and what we already have
-We should still be in the `shell-lesson-data` directory on the Desktop,
-which we can check using:
+We should still be in the `shell-lesson-data/north-pacific-gyre` 
+directory on the Desktop, which we can check using:
 
 ~~~
 $ pwd
@@ -39,33 +37,43 @@ $ pwd
 {: .language-bash}
 
 ~~~
-/Users/nelle/Desktop/shell-lesson-data
+/Users/nelle/Desktop/shell-lesson-data/north-pacific-gyre
 ~~~
 {: .output}
 
-Next we'll move to the `exercise-data/writing` directory and see what it contains:
+If necessary, navigate there with a command like the following:
+
 ~~~
-$ cd exercise-data/writing/
+$ cd ~/Desktop/shell-lesson-data/north-pacific-gyre
 ~~~
 {:  .language-bash}
 
+Since we created some files, this directory is now a mixture of 
+raw data, summary data, and scripts. 
+
 ~~~
-$ ls -F
+$ ls 
 ~~~
 {: .language-bash}
 
 ~~~
-haiku.txt  LittleWomen.txt
+NENE01729A.txt		NENE01843B.txt		NENE02043A.txt
+NENE01729B.txt		NENE01971Z.txt		NENE02043B.txt
+NENE01736A.txt		NENE01978A.txt		goodiff.sh
+NENE01751A.txt		NENE01978B.txt		goostats.sh
+NENE01751B.txt		NENE02040A.txt		lengths.txt
+NENE01812A.txt		NENE02040B.txt		sorted-lengths.txt
+NENE01843A.txt		NENE02040Z.txt
 ~~~
 {: .output}
 
 ### Create a directory
 
-Let's create a new directory called `thesis` using the command `mkdir thesis`
+Let's create a new directory called `results` using the command `mkdir results`
 (which has no output):
 
 ~~~
-$ mkdir thesis
+$ mkdir results
 ~~~
 {: .language-bash}
 
@@ -81,14 +89,20 @@ $ ls -F
 {: .language-bash}
 
 ~~~
-haiku.txt  LittleWomen.txt  thesis/
+NENE01729A.txt		NENE01843B.txt		NENE02043A.txt
+NENE01729B.txt		NENE01971Z.txt		NENE02043B.txt
+NENE01736A.txt		NENE01978A.txt		goodiff.sh
+NENE01751A.txt		NENE01978B.txt		goostats.sh
+NENE01751B.txt		NENE02040A.txt		lengths.txt
+NENE01812A.txt		NENE02040B.txt		results/
+NENE01843A.txt		NENE02040Z.txt		sorted-lengths.txt
 ~~~
 {: .output}
 
-Since we've just created the `thesis` directory, there's nothing in it yet:
+Since we've just created the `results` directory, there's nothing in it yet:
 
 ~~~
-$ ls -F thesis
+$ ls -F results
 ~~~
 {: .language-bash}
 
@@ -97,28 +111,12 @@ The `-p` option allows `mkdir` to create a directory with nested subdirectories
 in a single operation:
 
 ~~~
-$ mkdir -p ../project/data ../project/results
+$ mkdir -p results/lengths/2022-07/
+
 ~~~
 {: .language-bash}
 
-The `-R` option to the `ls` command will list all nested subdirectories within a directory.
-Let's use `ls -FR` to recursively list the new directory hierarchy we just created in the
-`project` directory:
 
-~~~
-$ ls -FR ../project
-~~~
-{: .language-bash}
-
-~~~
-../project/:
-data/  results/
-
-../project/data:
-
-../project/results:
-~~~
-{: .output}
 
 > ## Two ways of doing the same thing
 > Using the shell to create a directory is no different than using a file explorer.
@@ -158,13 +156,13 @@ data/  results/
 > or other special characters, you should surround the name in quotes (`""`).
 {: .callout}
 
-### Create a text file
+### Open a text file
+
 Let's change our working directory to `thesis` using `cd`,
 then run a text editor called Nano to create a file called `draft.txt`:
 
 ~~~
-$ cd thesis
-$ nano draft.txt
+$ nano sorted-lengths.txt
 ~~~
 {: .language-bash}
 
@@ -197,7 +195,8 @@ Once we're happy with our text, we can press <kbd>Ctrl</kbd>+<kbd>O</kbd>
 (press the <kbd>Ctrl</kbd> or <kbd>Control</kbd> key and, while
 holding it down, press the <kbd>O</kbd> key) to write our data to disk
 (we'll be asked what file we want to save this to:
-press <kbd>Return</kbd> to accept the suggested default of `draft.txt`).
+press <kbd>Return</kbd> 
+to accept the suggested default of `sorted-lengths.txt`).
 
 <div style="width:80%; margin: auto;"><img alt="screenshot of nano text editor in action"
 src="../fig/nano-screenshot.png"></div>
@@ -224,18 +223,7 @@ return to the shell.
 > file.
 {: .callout}
 
-`nano` doesn't leave any output on the screen after it exits,
-but `ls` now shows that we have created a file called `draft.txt`:
 
-~~~
-$ ls
-~~~
-{: .language-bash}
-
-~~~
-draft.txt
-~~~
-{: .output}
 
 
 > ## What's In A Name?
@@ -266,20 +254,12 @@ draft.txt
 
 ## Moving files and directories
 
-Returning to the `shell-lesson-data/exercise-data/writing` directory,
+We can use the `mv` command to move files from the working directory to the results directory.
 
-```
-$ cd ~/Desktop/shell-lesson-data/exercise-data/writing
-```
-{: .language-bash}
-
-In our `thesis` directory we have a file `draft.txt`
-which isn't a particularly informative name,
-so let's change the file's name using `mv`,
-which is short for 'move':
 
 ~~~
-$ mv thesis/draft.txt thesis/quotes.txt
+$ mv lengths.txt results
+$ mv sorted-lengths.txt results
 ~~~
 {: .language-bash}
 
@@ -292,12 +272,12 @@ Sure enough,
 `ls` shows us that `thesis` now contains one file called `quotes.txt`:
 
 ~~~
-$ ls thesis
+$ ls results
 ~~~
 {: .language-bash}
 
 ~~~
-quotes.txt
+lengths.txt		sorted-lengths.txt
 ~~~
 {: .output}
 
@@ -308,135 +288,33 @@ can be used to make `mv` ask you for confirmation before overwriting.
 
 Note that `mv` also works on directories.
 
-Let's move `quotes.txt` into the current working directory.
-We use `mv` once again,
-but this time we'll use just the name of a directory as the second argument
-to tell `mv` that we want to keep the filename
-but put the file somewhere new.
-(This is why the command is called 'move'.)
-In this case,
-the directory name we use is the special directory name `.` that we mentioned earlier.
-
-~~~
-$ mv thesis/quotes.txt .
-~~~
-{: .language-bash}
-
-The effect is to move the file from the directory it was in to the current working directory.
-`ls` now shows us that `thesis` is empty:
-
-~~~
-$ ls thesis
-~~~
-{: .language-bash}
-
-~~~
-$
-~~~
-{: .output}
-
-Alternatively, we can confirm the file `quotes.txt` is no longer present in the `thesis` directory
-by explicitly trying to list it:
-
-~~~
-$ ls thesis/quotes.txt
-~~~
-{: .language-bash}
-
-```
-ls: cannot access 'thesis/quotes.txt': No such file or directory
-```
-{: .error}
-
-`ls` with a filename or directory as an argument only lists the requested file or directory.
-If the file given as the argument doesn't exist, the shell returns an error as we saw above.
-We can use this to see that `quotes.txt` is now present in our current directory:
-
-~~~
-$ ls quotes.txt
-~~~
-{: .language-bash}
-
-~~~
-quotes.txt
-~~~
-{: .output}
-
-> ## Moving Files to a new folder
->
-> After running the following commands,
-> Jamie realizes that she put the files `sucrose.dat` and `maltose.dat` into the wrong folder.
-> The files should have been placed in the `raw` folder.
->
-> ~~~
-> $ ls -F
->  analyzed/ raw/
-> $ ls -F analyzed
-> fructose.dat glucose.dat maltose.dat sucrose.dat
-> $ cd analyzed
-> ~~~
-> {: .language-bash}
->
-> Fill in the blanks to move these files to the `raw/` folder
-> (i.e. the one she forgot to put them in)
->
-> ~~~
-> $ mv sucrose.dat maltose.dat ____/____
-> ~~~
-> {: .language-bash}
-> > ## Solution
-> > ```
-> > $ mv sucrose.dat maltose.dat ../raw
-> > ```
-> > {: .language-bash}
-> > Recall that `..` refers to the parent directory (i.e. one above the current directory)
-> > and that `.` refers to the current directory.
-> {: .solution}
-{: .challenge}
 
 ## Copying files and directories
 
+It is good practice to save a copy of your raw data.
+This ensures that data can be recovered if lost or modified.
+
 The `cp` command works very much like `mv`,
 except it copies a file instead of moving it.
-We can check that it did the right thing using `ls`
-with two paths as arguments --- like most Unix commands,
-`ls` can be given multiple paths at once:
+We can check that it did the right thing using `ls`.
+Let's make a directory called `raw-data` and copy all the NENE*txt files there.
+
 
 ~~~
-$ cp quotes.txt thesis/quotations.txt
-$ ls quotes.txt thesis/quotations.txt
+$ mkdir raw-data
+$ cp NENE*txt raw-data
+$ ls raw-data
 ~~~
 {: .language-bash}
 
 ~~~
-quotes.txt   thesis/quotations.txt
+NENE01729A.txt	NENE01751B.txt	NENE01971Z.txt	NENE02040B.txt
+NENE01729B.txt	NENE01812A.txt	NENE01978A.txt	NENE02040Z.txt
+NENE01736A.txt	NENE01843A.txt	NENE01978B.txt	NENE02043A.txt
+NENE01751A.txt	NENE01843B.txt	NENE02040A.txt	NENE02043B.txt
 ~~~
 {: .output}
 
-We can also copy a directory and all its contents by using the
-[recursive](https://en.wikipedia.org/wiki/Recursion) option `-r`,
-e.g. to back up a directory:
-
-```
-$ cp -r thesis thesis_backup
-```
-{: .language-bash}
-
-We can check the result by listing the contents of both the `thesis` and `thesis_backup` directory:
-
-```
-$ ls thesis thesis_backup
-```
-{: .language-bash}
-
-```
-thesis:
-quotations.txt
-
-thesis_backup:
-quotations.txt
-```
-{: .output}
 
 
 > ## Renaming Files
@@ -473,14 +351,14 @@ let's tidy up this directory by removing the `quotes.txt` file we created.
 The Unix command we'll use for this is `rm` (short for 'remove'):
 
 ~~~
-$ rm quotes.txt
+$ rm NENE02040Z.txt
 ~~~
 {: .language-bash}
 
 We can confirm the file has gone using `ls`:
 
 ~~~
-$ ls quotes.txt
+$ ls NENE02040Z.txt
 ~~~
 {: .language-bash}
 
@@ -505,7 +383,7 @@ If we try to remove the `thesis` directory using `rm thesis`,
 we get an error message:
 
 ~~~
-$ rm thesis
+$ rm results
 ~~~
 {: .language-bash}
 
@@ -521,7 +399,7 @@ This happens because `rm` by default only works on files, not directories.
 recursive option `-r`, and it will do so *without any confirmation prompts*:
 
 ~~~
-$ rm -r thesis
+$ rm -r results
 ~~~
 {: .language-bash}
 
