@@ -27,7 +27,7 @@ Please **download the data** for the lesson as described on the **Setup** page.
 Notes for this workshop are avilable at <https://pad.carpentries.org/2022-07-13-upr-online>.
 
 If have trouble downloading the software and/or data, 
-[click 
-here](https://mybinder.org/v2/gh/raynamharris/2022-07-13-upr-online/shell-lessons-data) 
-to launch a binder for access to a terminal in a browser window.
+click the launch binder button to launch a binder for access to a terminal in a browser window.
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/raynamharris/2022-07-13-upr-online/shell-lessons-data)
+
 
