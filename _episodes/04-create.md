@@ -3,8 +3,12 @@ title: "Working With Files and Directories"
 teaching: 15
 exercises: 5
 questions:
-- "How can I create, copy, and delete files and directories?"
-- "How can I edit files?"
+- "cp"
+- "mkdir"
+- "mv"
+- "nano"
+- "rm"
+- "rmdir"
 objectives:
 - "Create a directory hierarchy that matches a given diagram."
 - "Create files in that hierarchy using an editor or by copying and renaming existing files."
