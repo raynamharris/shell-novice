@@ -1,11 +1,12 @@
 ---
-title: "Navigating Files and Directories"
+title: "Navigating Files and Directories (aka Who/What/Where)"
 teaching: 15
 exercises: 5
 questions:
 - "cd"
 - "ls"
 - "pwd"
+- "`cd`, `ls`, and `pwd`"
 objectives:
 - "Explain the similarities and differences between a file and a directory."
 - "Translate an absolute path into a relative path and vice versa."
