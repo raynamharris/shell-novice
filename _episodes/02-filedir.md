@@ -3,9 +3,9 @@ title: "Navigating Files and Directories"
 teaching: 15
 exercises: 5
 questions:
+- "cd"
 - "ls"
 - "pwd"
-- "cd"
 objectives:
 - "Explain the similarities and differences between a file and a directory."
 - "Translate an absolute path into a relative path and vice versa."

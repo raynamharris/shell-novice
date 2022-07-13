@@ -3,7 +3,15 @@ title: "Pipes and Filters"
 teaching: 10
 exercises: 10
 questions:
-- "How can I combine existing commands to do new things?"
+
+- ">"
+- "|"
+- "cat"
+- "head"
+- "echo"
+- "sort"
+- "tail"
+- "wc"
 objectives:
 - "Redirect a command's output to a file."
 - "Construct command pipelines with two or more stages."
