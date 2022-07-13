@@ -43,7 +43,7 @@ $ ls -S north-pacific-gyre
 
 
 $ cd ~/Desktop/shell-lesson-data/north-pacific-gyre
-$ ls 
+$ ls
 $ wc *.txt
 $ wc -l *.txt
 $ wc -l *.txt > lengths.txt
@@ -64,7 +64,7 @@ $ ls NENE*[AB].txt
 
 $ pwd
 $ cd ~/Desktop/shell-lesson-data/north-pacific-gyre
-$ ls 
+$ ls
 $ mkdir results
 $ ls -F
 $ ls -F results
@@ -92,17 +92,14 @@ $ rm -r results
 
 $ wc -l NENE*[AB].txt | sort -n   | head -n 1
 $ sort -n  NENE*.txt | head -n 1
-$ for file in NENE*[AB].txt
-$ for file in NENE*[AB].txt
-$ for x in NENE*txt
-$ for file in NENE*[AB].txt
+$ for file in NENE*[AB].txt; do sort -n $file | head -n 1; done
+$ for file in NENE*[AB].txt; do echo $file; sort -n $file | head -n 1; done
+$ for x in NENE*txt; do head -n 2 $x | tail -n 1; done
+$ for file in NENE*[AB].txt; echo $file; head -3 $file; done
 $ echo hello there
 $ cp *.txt raw-*.txt
-$ for file in NENE*.txt
-$ for file in NENE*.txt
-$ cd north-pacific-gyre
-$ for datafile in NENE*A.txt NENE*B.txt
-$ for datafile in NENE*A.txt NENE*B.txt
+$ for file in NENE*.txt; do cp $file raw-$file; done
+$ for file in NENE*.txt; do echo $file raw-$file; cp $file raw-$file; done
 $ for datafile in NENE*A.txt NENE*B.txt; do echo $datafile stats-$datafile; done
 $ for datafile in NENE*A.txt NENE*B.txt; do bash goostats.sh $datafile stats-$datafile; done
 $ for datafile in NENE*A.txt NENE*B.txt; do echo $datafile;
@@ -191,7 +188,7 @@ $ ls north-pacific-gyre/goo
 $ ls -s north-pacific-gyre
 $ ls -S north-pacific-gyre
 $ cd ~/Desktop/shell-lesson-data/north-pacific-gyre
-$ ls 
+$ ls
 $ wc *.txt
 $ wc -l *.txt
 $ wc -l *.txt > lengths.txt
@@ -207,7 +204,7 @@ $ ls *Z.txt
 $ ls NENE*[AB].txt
 $ pwd
 $ cd ~/Desktop/shell-lesson-data/north-pacific-gyre
-$ ls 
+$ ls
 $ mkdir results
 $ ls -F
 $ ls -F results
