@@ -3,8 +3,7 @@ title: "Shell Scripts (aka Automation)"
 teaching: 10
 exercises: 10
 questions:
-- "$"
-- "bash"
+- "$ and bash"
 objectives:
 - "Write a shell script that runs a command or series of commands for a fixed set of files."
 - "Run a shell script from the command line."

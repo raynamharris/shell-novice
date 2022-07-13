@@ -3,9 +3,7 @@ title: "Finding Things (aka Control F)"
 teaching: 10
 exercises: 5
 questions:
-- "for"
-- "do"
-- "done"
+- "grep and find"
 objectives:
 - "Use `grep` to select lines from text files that match simple patterns."
 - "Use `find` to find files and directories whose names match simple patterns."
