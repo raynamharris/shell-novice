@@ -3,8 +3,7 @@ title: "Wrap Up"
 teaching: 5
 exercises: 0
 questions:
-- "What did we learn today?"
-- "What's next?"
+- " "
 objectives:
 - "See a history of what you learned today"
 keypoints:

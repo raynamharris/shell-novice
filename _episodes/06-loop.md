@@ -1,9 +1,11 @@
----
+ ---
 title: "Loops"
 teaching: 10
 exercises: 10
 questions:
-- "How can I perform the same actions on many different files?"
+- "for"
+- "do"
+- "done"
 objectives:
 - "Write a loop that applies one or more commands separately to each file in a set of files."
 - "Trace the values taken on by a loop variable during execution of the loop."

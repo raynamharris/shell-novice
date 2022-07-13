@@ -3,8 +3,9 @@ title: "Finding Things"
 teaching: 10
 exercises: 5
 questions:
-- "How can I find files?"
-- "How can I find things in files?"
+- "for"
+- "do"
+- "done"
 objectives:
 - "Use `grep` to select lines from text files that match simple patterns."
 - "Use `find` to find files and directories whose names match simple patterns."
