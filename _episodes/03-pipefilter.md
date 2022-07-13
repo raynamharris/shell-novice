@@ -1,5 +1,5 @@
 ---
-title: "Pipes and Filters"
+title: "Pipes and Filters (aka Quick Quality Control)"
 teaching: 10
 exercises: 10
 questions:

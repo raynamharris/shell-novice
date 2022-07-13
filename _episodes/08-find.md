@@ -1,5 +1,5 @@
 ---
-title: "Finding Things"
+title: "Finding Things (aka Control F)"
 teaching: 10
 exercises: 5
 questions:

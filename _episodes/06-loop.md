@@ -1,5 +1,5 @@
 ---
-title: "Loops"
+title: "Loops (aka Repetitive Tasks)"
 teaching: 10
 exercises: 10
 questions:

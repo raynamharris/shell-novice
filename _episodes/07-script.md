@@ -1,5 +1,5 @@
 ---
-title: "Shell Scripts"
+title: "Shell Scripts (aka Automation)"
 teaching: 10
 exercises: 10
 questions:

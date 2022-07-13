@@ -1,5 +1,5 @@
 ---
-title: "Working With Files and Directories"
+title: "Working With Files and Directories (aka Organization)"
 teaching: 15
 exercises: 5
 questions:
