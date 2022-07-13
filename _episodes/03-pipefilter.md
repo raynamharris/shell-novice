@@ -3,9 +3,8 @@ title: "Pipes and Filters"
 teaching: 10
 exercises: 10
 questions:
-
-- ">"
-- "|"
+- '>'
+- '|'
 - "cat"
 - "head"
 - "echo"
